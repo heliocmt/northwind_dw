@@ -16,3 +16,12 @@ models:
            tests:
               - unique
               - not_null
+
+    - name: dim_products
+      columns:
+         - name: product_id
+           description: "Chave primária"
+           tests:
+              - unique
+              - not_null
+        
