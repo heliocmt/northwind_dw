@@ -7,7 +7,12 @@ sources:
       - name: customers
         columns:
           - name: customer_id
-            description: Primary key of the orders table
+            description: Chave primária da tabela Clientes
             tests:
               - unique
               - not_null
+      
+      - name: products
+        columns:
+          - name: product_id
+            description: Chave primária da tabela Produtos
