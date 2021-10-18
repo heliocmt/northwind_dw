@@ -6,7 +6,7 @@ with
     ),
     transformed as (
         select
-       , product_id 
+       row_number() over (order by product_id) as product_id 
        , product_name 
        , supplier_id 
        , category_id 
@@ -16,7 +16,6 @@ with
        , units_on_order 
        , reorder_level 
        , discontinued
-        
         from staging
     )
     select * from transformed

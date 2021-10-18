@@ -15,7 +15,6 @@ with
         , ship_via as shipper_id
         , ship_address
         , required_date
-
         from {{ source('erp_northwind','orders')}}
     )
-select * from source_data
+    select * from source_data 
