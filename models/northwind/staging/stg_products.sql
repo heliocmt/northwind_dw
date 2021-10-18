@@ -11,7 +11,6 @@ source_data as (
        , units_on_order 
        , reorder_level 
        , discontinued
-        
        from {{ source('erp_northwind','products')}}
     )
 

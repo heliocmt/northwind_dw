@@ -11,8 +11,14 @@ sources:
             tests:
               - unique
               - not_null
-      
       - name: products
         columns:
           - name: product_id
             description: Chave primária da tabela Produtos
+      - name: order_details
+      - name: suppliers
+        columns:
+          - name: supplier_id
+      - name: employees
+        columns:
+          - name: employee_id
