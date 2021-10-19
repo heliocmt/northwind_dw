@@ -3,7 +3,7 @@ version: 2
 models:
     - name: fact_orders
       columns:
-         - name: pedidos
+         - name: order_id
            description: "Chave primária"
            tests:
               - unique
@@ -39,5 +39,12 @@ models:
            description: "Chave primária"
            tests:
               - unique
+              - not_null
+
+    - name: dim_country
+      columns:
+         - name: ship_country
+           description: "Chave primária"
+           tests:
               - not_null
         
