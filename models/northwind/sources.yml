@@ -22,3 +22,6 @@ sources:
       - name: employees
         columns:
           - name: employee_id
+      - name: country
+        columns:
+          - name: ship_country
