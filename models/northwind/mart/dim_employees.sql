@@ -6,11 +6,11 @@ with
     ),
     transformed as (
         select
-        row_number() over (order by employee_id) as employee_id 
+        row_number() over (order by employee_id) as employee_sk
+        , employee_id
         , first_name
         , last_name
         , title
-        , title_of_courtesy
         , birth_date
         , hire_date
         , address

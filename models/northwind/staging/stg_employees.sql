@@ -5,7 +5,6 @@ source_data as (
        , first_name
        , last_name
        , title
-       , title_of_courtesy
        , birth_date
        , hire_date
        , address

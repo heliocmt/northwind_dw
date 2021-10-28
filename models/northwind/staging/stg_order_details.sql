@@ -8,5 +8,4 @@
             , discount 
             from {{ source('erp_northwind','order_details')}}
         )
-        
         select * from source_data

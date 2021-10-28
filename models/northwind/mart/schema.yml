@@ -43,8 +43,15 @@ models:
 
     - name: dim_country
       columns:
-         - name: ship_country
+         - name: order_id
            description: "Chave primária"
            tests:
+              - unique
               - not_null
         
+    - name: dim_date
+      columns:
+         - name: order_date
+           description: "Chave primária"
+           tests:
+              - not_null    

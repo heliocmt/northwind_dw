@@ -2,13 +2,13 @@
 
 with
     staging as (
-        select * from {{ ref('stg_country') }}
+        select * from {{ ref('stg_date') }}
     ),
     transformed as (
         select
-        order_sk
+        order_date_sk
+        , order_date
         , order_id
-        , ship_country
         from staging
     )
     select * from transformed
