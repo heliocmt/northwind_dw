@@ -1,9 +1,9 @@
 with source_data as (
         select
-        ship_country
+        row_number() over (order by order_id) as order_sk
         , order_id
+        , ship_country
         , customer_id
-    
         from {{ source('erp_northwind','country')}}
     )
 

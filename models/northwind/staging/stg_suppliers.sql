@@ -1,8 +1,8 @@
 with 
 source_data as (
        select
-       supplier_id 
-       , company_name 
+       supplier_id
+       , company_name
        , contact_name
        , contact_title
        , address

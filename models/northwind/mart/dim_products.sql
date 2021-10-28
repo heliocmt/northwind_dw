@@ -6,7 +6,8 @@ with
     ),
     transformed as (
         select
-       row_number() over (order by product_id) as product_id 
+       row_number() over (order by product_id) as product_sk
+       , product_id
        , product_name 
        , supplier_id 
        , category_id 
