@@ -24,9 +24,6 @@ sources:
       - name: employees
         columns:
           - name: employee_id
-      - name: country
-        columns:
-          - name: order_id
       - name: date
         columns:
           - name: order_date

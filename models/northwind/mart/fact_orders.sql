@@ -126,7 +126,9 @@ with
         , ship_country
         , order_details_with_sk.unit_price 
         , order_details_with_sk.quantity 
-        , order_details_with_sk.discount  
+        , order_details_with_sk.discount
+        , order_details_with_sk.unit_in_stock
+        , order_details_with_sk.unit_on_order  
         from order_with_sk as final
         left join order_details_with_sk on final.order_id = order_details_with_sk.order_id       
     )
