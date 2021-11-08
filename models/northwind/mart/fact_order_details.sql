@@ -23,7 +23,7 @@ with
         , products.unit_price 
         , quantity  
         , discount  
-        , products.supplier_id 
+        , products.supplier_id
         , products.category_id 
         , products.quantity_per_unit
         , products.units_in_stock 
