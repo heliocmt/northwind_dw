@@ -8,6 +8,13 @@ models:
            tests:
               - not_null
 
+    - name: fact_order_details
+      columns:
+         - name: order_id
+           description: "Chave primária"
+           tests:
+              - not_null
+
     - name: dim_customers
       columns:
          - name: customer_id
