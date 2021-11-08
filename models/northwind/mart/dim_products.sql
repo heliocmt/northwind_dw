@@ -15,8 +15,6 @@ with
        , unit_price 
        , units_in_stock 
        , units_on_order 
-       , reorder_level 
-       , discontinued
         from staging
     )
     select * from transformed
