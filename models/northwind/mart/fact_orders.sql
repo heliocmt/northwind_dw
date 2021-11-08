@@ -52,10 +52,10 @@ with
     order_with_sk as (
         select
         customers.customer_sk as customer_fk
-        , order_date.order_date_sk as order_date_fk
+        , order_date1.order_date_sk as order_date_fk
         , employees.employee_sk as employee_fk
-        , order_date.order_id as order_id
-        , order_date  
+        , order_date1.order_id as order_id
+        , order_date
         , shipped_date 
         , required_date
         , freight
