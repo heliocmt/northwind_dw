@@ -1,5 +1,6 @@
-with
+{{ config(materialized='table') }}
 
+with
     products as (
         select
         product_sk 
