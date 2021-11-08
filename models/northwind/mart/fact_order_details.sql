@@ -27,7 +27,7 @@ with
         , products.category_id 
         , products.quantity_per_unit
         , products.units_in_stock 
-        , products.units_on_order 
+        , products.units_on_order
         from {{ ref('stg_order_details') }} as order_details
         left join products on order_details.product_id = products.product_id
         order by order_details.order_id
