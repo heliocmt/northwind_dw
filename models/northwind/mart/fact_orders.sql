@@ -41,7 +41,7 @@ with
         from {{ ref('dim_suppliers') }}
     ),
 
-    order_date as (
+    order_date1 as (
         select
         order_date_sk
         , order_date
@@ -68,7 +68,7 @@ with
         from {{ ref('stg_orders') }} as order_with_sk
         left join customers on order_with_sk.customer_id = customers.customer_id
         left join employees on order_with_sk.employee_id = employees.employee_id
-        left join order_date on order_with_sk.order_date = order_date.order_date
+        left join order_date1 on order_with_sk.order_date = order_date1.order_date
     ),
     
     order_details as (
