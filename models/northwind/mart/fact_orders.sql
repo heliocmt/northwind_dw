@@ -114,6 +114,7 @@ with
         , order_date_fk
         , employee_fk
         , supplier_fk
+        , order_date
         , shipped_date 
         , required_date  
         , freight 
