@@ -18,16 +18,16 @@ with
     order_details as (
         select 
         order_id
-        , products.product_sk 
-        , products.product_name
-        , products.unit_price 
+        , products.product_sk as product_sk
+        , products.product_name as product_name
+        , products.unit_price as unit_price
         , quantity  
         , discount  
-        , products.supplier_id
-        , products.category_id 
-        , products.quantity_per_unit
-        , products.units_in_stock 
-        , products.units_on_order
+        , products.supplier_id as supplier_id
+        , products.category_id as category_id
+        , products.quantity_per_unit as quantity_per_unit
+        , products.units_in_stock as units_in_stock
+        , products.units_on_order as units_on_order
         from {{ ref('stg_order_details') }} as order_details
         left join products on order_details.product_id = products.product_id
         order by order_details.order_id

@@ -19,8 +19,6 @@ with
         , unit_price 
         , units_in_stock 
         , units_on_order 
-        , reorder_level 
-        , discontinued
         from {{ ref('dim_products') }}
     ),
 
@@ -51,11 +49,11 @@ with
 
     order_with_sk as (
         select
-        customers.customer_sk as customer_fk
+        order_date1.order_id 
+        , customers.customer_sk as customer_fk
         , order_date1.order_date_sk as order_date_fk
         , employees.employee_sk as employee_fk
-        , order_date1.order_id as order_id
-        , order_date
+        , order_date1.order_date
         , shipped_date 
         , required_date
         , freight
@@ -74,18 +72,17 @@ with
     order_details as (
         select 
         order_id
-        , products.product_sk as product_sk
-        , products.product_name as product_name
-        , products.unit_price as unit_price
+        , product_sk 
+        , product_name 
+        , unit_price 
         , quantity  
         , discount  
-        , products.supplier_id as supplier_id
-        , products.category_id as category_id
-        , products.quantity_per_unit as quantity_per_unit
-        , products.units_in_stock as unit_in_stock
-        , products.units_on_order as unit_on_order
-        from {{ ref('stg_order_details') }} as order_details
-        left join products on order_details.product_id = products.product_id
+        , supplier_id 
+        , category_id 
+        , quantity_per_unit 
+        , units_in_stock 
+        , units_on_order 
+        from {{ ref('fact_order_details') }} as order_details
     ),
 
     order_details_with_sk as (
@@ -98,8 +95,8 @@ with
         , order_details.discount 
         , order_details.category_id
         , order_details.quantity_per_unit
-        , order_details.unit_in_stock
-        , order_details.unit_on_order
+        , order_details.units_in_stock
+        , order_details.units_on_order
         , supplier_sk as supplier_fk
         , company_name
         from suppliers as order_details_with_sk
@@ -127,8 +124,8 @@ with
         , order_details_with_sk.unit_price 
         , order_details_with_sk.quantity 
         , order_details_with_sk.discount
-        , order_details_with_sk.unit_in_stock
-        , order_details_with_sk.unit_on_order  
+        , order_details_with_sk.units_in_stock
+        , order_details_with_sk.units_on_order  
         from order_with_sk as final
         left join order_details_with_sk on final.order_id = order_details_with_sk.order_id       
     )
