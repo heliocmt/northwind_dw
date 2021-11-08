@@ -31,5 +31,6 @@ with
         , products.units_on_order 
         from {{ ref('stg_order_details') }} as order_details
         left join products on order_details.product_id = products.product_id
+        order by order_details.order_id
     )
     select * from order_details
