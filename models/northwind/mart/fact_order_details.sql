@@ -11,9 +11,7 @@ with
         , quantity_per_unit 
         , unit_price 
         , units_in_stock 
-        , units_on_order 
-        , reorder_level 
-        , discontinued
+        , units_on_order
         from {{ ref('dim_products') }}
     ),
 
