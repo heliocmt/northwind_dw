@@ -12,7 +12,7 @@ with
         , ship_postal_code
         , ship_city
         , freight
-        , ship_via as shipper_id
+        , ship_via 
         , ship_address
         , required_date
         from {{ source('erp_northwind','orders')}}

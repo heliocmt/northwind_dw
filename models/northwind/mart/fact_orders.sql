@@ -8,20 +8,6 @@ with
         from {{ ref('dim_customers') }}
     ),
 
-    products as (
-        select
-        product_sk 
-        , product_id 
-        , product_name 
-        , supplier_id 
-        , category_id 
-        , quantity_per_unit 
-        , unit_price 
-        , units_in_stock 
-        , units_on_order 
-        from {{ ref('dim_products') }}
-    ),
-
     employees as (
         select 
         employee_sk
@@ -43,15 +29,13 @@ with
         select
         order_date_sk
         , order_date
-        , order_id
         from {{ ref('dim_date') }}
     ),
 
     order_with_sk as (
-        select
-        order_date1.order_id 
+        select distinct
+        order_id 
         , customers.customer_sk as customer_fk
-        , order_date1.order_date_sk as order_date_fk
         , employees.employee_sk as employee_fk
         , order_date1.order_date
         , shipped_date 
@@ -67,66 +51,6 @@ with
         left join customers on order_with_sk.customer_id = customers.customer_id
         left join employees on order_with_sk.employee_id = employees.employee_id
         left join order_date1 on order_with_sk.order_date = order_date1.order_date
-    ),
-    
-    order_details as (
-        select 
-        order_id
-        , product_sk 
-        , product_name 
-        , unit_price 
-        , quantity  
-        , discount  
-        , supplier_id 
-        , category_id 
-        , quantity_per_unit 
-        , units_in_stock 
-        , units_on_order 
-        from {{ ref('fact_order_details') }} as order_details
-    ),
+        order by order_id asc)
 
-    order_details_with_sk as (
-        select 
-        order_details.order_id
-        , order_details.product_sk as product_fk
-        , order_details.product_name
-        , order_details.unit_price 
-        , order_details.quantity  
-        , order_details.discount 
-        , order_details.category_id
-        , order_details.quantity_per_unit
-        , order_details.units_in_stock
-        , order_details.units_on_order
-        , supplier_sk as supplier_fk
-        , company_name
-        from suppliers as order_details_with_sk
-        left join order_details on order_details_with_sk.supplier_id = order_details.supplier_id 
-    ),
-    
-    final as (
-        select
-        order_details_with_sk.order_id as order_id
-        , customer_fk 
-        , order_details_with_sk.product_fk
-        , order_date_fk
-        , employee_fk
-        , supplier_fk
-        , order_date
-        , shipped_date 
-        , required_date  
-        , freight 
-        , ship_name  
-        , ship_address 
-        , ship_city 
-        , ship_region  
-        , ship_postal_code 
-        , ship_country
-        , order_details_with_sk.unit_price 
-        , order_details_with_sk.quantity 
-        , order_details_with_sk.discount
-        , order_details_with_sk.units_in_stock
-        , order_details_with_sk.units_on_order  
-        from order_with_sk as final
-        left join order_details_with_sk on final.order_id = order_details_with_sk.order_id       
-    )
- select * from final
+ select * from order_with_sk
