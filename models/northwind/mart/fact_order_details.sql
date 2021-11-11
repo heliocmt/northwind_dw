@@ -22,6 +22,13 @@ with
         , company_name
         from {{ ref('dim_suppliers') }}
     ),
+    
+    freight1 as (
+        select
+        freight
+        , order_id
+        from {{ ref('stg_orders')}}
+    ),
 
     order_details as (
         select 
@@ -42,7 +49,7 @@ with
 
     order_details_with_sk as (
         select 
-        order_details.order_id as order_id
+        order_details.order_id
         , order_details.product_sk as product_fk
         , order_details.product_name
         , order_details.unit_price 
@@ -57,5 +64,24 @@ with
         from suppliers as order_details_with_sk
         left join order_details on order_details_with_sk.supplier_id = order_details.supplier_id 
         order by order_id asc
-    )
-    select * from order_details_with_sk
+    ),
+        final as (
+        select
+        order_details_with_sk.order_id
+        , product_fk
+        , product_name
+        , unit_price 
+        , quantity  
+        , discount 
+        , freight1.freight
+        , category_id
+        , quantity_per_unit
+        , units_in_stock
+        , units_on_order
+        , supplier_fk
+        , company_name
+        from order_details_with_sk
+        left join freight1 on order_details_with_sk.order_id = freight1.order_id
+        order by order_id asc 
+        )
+    select * from final
